@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  background-color: #474747;
+}
+
+/* Navigation Bar */
+.navbar {
+  overflow: hidden;
+  display: inline-flex;
+  width: 100%;
+  height: 2.3rem;
+  align-items: center;
+  background-color: #474747;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  height: fit-content;
+  color: #a4fff3;
+}
+
+.icons {
+  position: absolute;
+  left: 37rem;
+}
+
+.icon {
+  margin: 0 0.5rem;
+}
+
+/* Expense Overview Section */
+.overview-box {
+  background-color: #f6f6f6;
+  margin-top: 0.5rem;
+  margin-left: 0.75rem;
+  width: 74%;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 0px 0px 3px 1px #f6f6f6;
+}
+
+/* top section with total expense */
+.total-box {
+  display: inline-block;
+  width: 100%;
+  color: #2e2e2e;
+}
+
+.total-expense {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.total-expense p {
+  font-size: 1rem;
+}
+
+.total-expense__label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.month__btn {
+  float: right;
+  position: absolute;
+  top: 3.75rem;
+  left: 35rem;
+  padding: 0.5rem 1.25rem;
+  height: fit-content;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 3px 1px #2e2e2e;
+  background-color: #2e2e2e;
+  color: #a4fff3;
+  border: none;
+}
+
+.month__btn:hover {
+  cursor: pointer;
+}
+
+/* area with charts */
+.expense-charts {
+  display: inline-block;
+}
+
+.bar-outer {
+  height: 10rem;
+}
+
+.bar-inner {
+  height: 100%;
+  background-color: #2e2e2e;
+  border-radius: 15px 15px 0px 0px;
+  /* need to flip the color */
+}
+
+.chart-category {
+  float: left;
+  margin: 0.5rem 1.75rem;
+}
+
+.category-total__label {
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+.category__label {
+  margin-top: 0.5rem;
+}
+
+/* expense list section */
+.expense-list {
+  margin-top: 0.5rem;
+  width: 74%;
+  margin-left: 0.75rem;
+}
+
+.expense-item {
+  width: 100%;
+  height: fit-content;
+  display: inline-flex;
+  box-shadow: 0px 0px 3px 1px #f6f6f6;
+  border-radius: 18px;
+  background-color: #f6f6f6;
+  margin: 0.5rem 0;
+}
+
+/* expense dteials (amount, date, category, description) */
+.expense-amount-date {
+  width: 12rem;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  margin-right: 0.5rem;
+  background-color: #2e2e2e;
+  border-radius: 17px 30px 30px 17px;
+}
+
+.expense-amount__label {
+  font-size: 2rem;
+  color: #f6f6f6;
+}
+
+.expense-date__label {
+  font-size: 1.25rem;
+  color: #e6e6e6c0;
+}
+
+.expense-detail {
+  display: inline-flex;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0rem;
+}
+
+.expense-category__label {
+  margin: auto 0;
+  text-align: center;
+  width: fit-content;
+  font-size: 1.5rem;
+}
+
+.expense-description__label {
+  width: fit-content;
+  height: fit-content;
+  margin: auto 0.5rem;
+}
+
+/* expense edit and delet buttons */
+.expense-edit__btn {
+  margin: auto 0;
+  padding: 0.5rem 0.75rem;
+  height: fit-content;
+  border-radius: 1rem;
+  background-color: #4f4f4f;
+  color: #a4fff3;
+  border: none;
+}
+
+.expense-edit__btn:hover {
+  cursor: pointer;
+}
+
+.expense-delete__btn {
+  margin: auto 1rem;
+  height: fit-content;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.expense-delete__btn:hover {
+  cursor: pointer;
+}
