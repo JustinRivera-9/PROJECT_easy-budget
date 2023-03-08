@@ -17,7 +17,7 @@ const filterMonthBtn = document.querySelector(".month__btn");
 const editExpenseBtn = document.querySelector(".expense-edit__btn");
 const deleteExpenseBtn = document.querySelector(".expense-delete__btn");
 // INPUTS
-const inputAmountLabel = document.querySelector(".form-amount-area").value;
+const inputAmountLabel = document.querySelector(".form-amount-area");
 const inputDetailLabel = document.querySelector(".form-input__description");
 const [...inputCategoryArray] =
   document.getElementsByClassName("form-category__btn");
@@ -25,83 +25,58 @@ const [...inputCategoryArray] =
 const chart_innerBar = document.querySelector(".bar-inner");
 const expenseList = document.querySelector(".expense-list"); //insert adjascent element
 const categorySection = document.querySelector(".category-section");
+const form = document.querySelector("form");
 
 // STARTER VARIABLES
-const newExpense = {};
-let selectedCategory;
-
-// TEST DATA
-const expenseData = [
-  {
-    amount: 56.12,
-    category: "night out",
-    description: "denver beer co with friends",
-    date: {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() - 2,
-      year: new Date().getFullYear(),
-    },
-  },
-  {
-    amount: 152.75,
-    category: "misc",
-    description: "plane tickets to florida",
-    date: {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() - 2,
-      year: new Date().getFullYear(),
-    },
-  },
-  {
-    amount: 950,
-    category: "fixed cost",
-    description: "rent",
-    date: {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() - 2,
-      year: new Date().getFullYear(),
-    },
-  },
-  {
-    amount: 38.59,
-    category: "eating out",
-    description: "school house with kelly and jared",
-    date: {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() - 2,
-      year: new Date().getFullYear(),
-    },
-  },
-  {
-    amount: 40,
-    category: "night out",
-    description: "denver bars",
-    date: {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() - 2,
-      year: new Date().getFullYear(),
-    },
-  },
-];
+const expenses = [];
+let inputCategory;
+let inputAmount;
+let inputDetail;
 
 // NOTE: there should be a 'loadUI()' function that reloads the expenses array and updates the overview
-// 1. Save form fields
-//    - save them in an object
-//    - add unique ID to that object (to be used to find and edit/delete expenses)
 
-// sets the amount ///////////
+// saves the value of input fields
+const handleInputs = function (e) {
+  inputAmount = Number(inputAmountLabel.value);
+  inputDetail = inputDetailLabel.value;
+};
 
-// sets the category
+// sets the selected category
 inputCategoryArray.forEach((category) => {
   category.addEventListener("click", (e) => {
     e.preventDefault();
-    selectedCategory = e.target.innerHTML;
+    inputCategory = e.target.innerHTML;
+    category.classList.toggle("active-category");
+    //IMPROVEMENT: Remove class
   });
 });
 
+// handles form submission
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  // create new object
-  newExpense.category = selectedCategory;
+  // adds properties to the expense object
+  const newExpense = {};
+  newExpense.amount = inputAmount;
+  newExpense.category = inputCategory;
+  newExpense.detail = inputDetail;
+  (newExpense.date = {
+    month: new Date().getMonth() + 1,
+    day: new Date().getDay() - 2,
+    year: new Date().getFullYear(),
+  }),
+    (newExpense.id = Math.floor(Math.random() * 10000));
+
+  // adds expense object to expenses array
+  expenses.push(newExpense);
+  console.log(expenses);
+
+  // resets form fields
+  inputAmountLabel.value = "";
+  inputDetailLabel.value = "";
+  inputCategoryArray.forEach((category) => {
+    category.classList.remove("active-category");
+  });
 });
+
+// for each expense object in the expense array, create a new element containing that expenses information

@@ -167,30 +167,25 @@
       </div>
     </div>
     <form class="right">
-      <h2>AMOUNT ($)</h2>
-      <input
-        type="number"
-        min="1"
-        class="form-amount-area"
-        placeholder="$165.28"
-      />
-      <label class="form-amount__label"></label>
-      <h2>CATEGORY</h2>
+      <h2 class="form-label">AMOUNT ($)</h2>
+      <input type="number" onchange="handleInputs()" class="form-amount-area" />
+      <h2 class="form-label">CATEGORY</h2>
       <div class="category-section">
         <div class="form-category__btn" value="night out">NIGHT OUT</div>
         <div class="form-category__btn">EATING OUT</div>
-        <div class="form-category__btn" id="long-word">GROCERIES</div>
+        <div class="form-category__btn">GROCERIES</div>
         <div class="form-category__btn">CAR</div>
         <div class="form-category__btn">FIXED</div>
         <div class="form-category__btn">MISC</div>
       </div>
       <textarea
+        onchange="handleInputs()"
         class="form-input__description"
         cols="1rem"
         rows="1"
         placeholder="Denver beer co and dinner with friends..."
       ></textarea>
-      <button type="submit" class="form-submit__btn">ENTER EXPENSE</button>
+      <button class="form-submit__btn">ENTER EXPENSE</button>
     </form>
     <script src="./script.js"></script>
   </body>
