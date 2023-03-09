@@ -23,7 +23,7 @@ const [...inputCategoryArray] =
   document.getElementsByClassName("form-category__btn");
 // MISC
 const chart_innerBar = document.querySelector(".bar-inner");
-const expenseList = document.querySelector(".expense-list"); //insert adjascent element
+const expenseList = document.querySelector(".expense-list");
 const categorySection = document.querySelector(".category-section");
 const form = document.querySelector("form");
 
@@ -69,7 +69,6 @@ submitBtn.addEventListener("click", (e) => {
 
   // adds expense object to expenses array
   expenses.push(newExpense);
-  console.log(expenses);
 
   // resets form fields
   inputAmountLabel.value = "";
@@ -77,6 +76,31 @@ submitBtn.addEventListener("click", (e) => {
   inputCategoryArray.forEach((category) => {
     category.classList.remove("active-category");
   });
+
+  const displayExpenses = function (expenses) {
+    expenseList.innerHTML = "";
+
+    expenses.forEach((expense) => {
+      const html = `
+      <div class="expense-item">
+        <div class="expense-amount-date">
+          <p class="expense-amount__label">$${expense.amount}</p>
+          <p class="expense-date__label">${expense.date.month}/${expense.date.day}/${expense.date.year}</p>
+        </div>
+        <div class="expense-detail">
+          <p class="expense-category__label">${expense.category}</p>
+          <p class="expense-description__label">${expense.detail}</p>
+        </div>
+        <button class="expense-edit__btn">Edit</button>
+        <button class="expense-delete__btn">X</button>
+      </div>
+      `;
+
+      expenseList.insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  displayExpenses(expenses);
 });
 
-// for each expense object in the expense array, create a new element containing that expenses information
+const test = [1];
+console.log(test.indexOf[-1]);
