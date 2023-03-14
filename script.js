@@ -1,4 +1,3 @@
-"use strict";
 // NOTE: there should be a 'loadUI()' function that reloads the expenses array and updates the overview
 
 ///// DOCUMENT VARIABLES /////
@@ -16,8 +15,8 @@ const list_detailLabel = document.querySelector(".expense-description__label");
 // BUTTONS
 const submitBtn = document.querySelector(".form-submit__btn");
 const filterMonthBtn = document.querySelector(".month__btn");
-const editExpenseBtn = document.querySelector(".expense-edit__btn");
-const deleteExpenseBtn = document.querySelector(".expense-delete__btn");
+const [...editExpenseBtn] = document.querySelectorAll(".expense-edit__btn");
+const deleteExpenseBtns = document.querySelectorAll(".expense-delete__btn");
 // INPUTS
 const inputAmountLabel = document.querySelector(".form-amount-area");
 const inputDetailLabel = document.querySelector(".form-input__description");
@@ -26,6 +25,7 @@ const [...inputCategoryArray] =
 // MISC
 const chart_innerBar = document.querySelector(".bar-inner");
 const expenseList = document.querySelector(".expense-list");
+const expenseListParent = document.getElementById('parent-list')
 const categorySection = document.querySelector(".category-section");
 const form = document.querySelector("form");
 
@@ -184,14 +184,13 @@ const calculateTotals = function (expenses) {
   chart_expenseTotalLabel.textContent = `$${total}`;
 
   // Updates the height of the category charts
-  chart_bar[0].style.height = `${(nightOut / total) * 100}% `;
-  chart_bar[1].style.height = `${(eatingOut / total) * 100}% `;
-  chart_bar[2].style.height = `${(groceries / total) * 100}% `;
-  chart_bar[3].style.height = `${(car / total) * 100}% `;
-  chart_bar[4].style.height = `${(fixed / total) * 100}% `;
-  chart_bar[5].style.height = `${(misc / total) * 100}% `;
+  chart_bar[0].style.height = `${(nightOut / total) * 200}% `;
+  chart_bar[1].style.height = `${(eatingOut / total) * 200}% `;
+  chart_bar[2].style.height = `${(groceries / total) * 200}% `;
+  chart_bar[3].style.height = `${(car / total) * 200}% `;
+  chart_bar[4].style.height = `${(fixed / total) * 200}% `;
+  chart_bar[5].style.height = `${(misc / total) * 200}% `;
 };
-// Updates the category totals
 
 // HELPER FUNCTIONS - Resets form field after submission
 const resetForm = function () {
@@ -218,7 +217,7 @@ const displayExpenses = function (expenses) {
         <p class="expense-description__label">${expense.detail}</p>
       </div>
       <button class="expense-edit__btn">Edit</button>
-      <button class="expense-delete__btn">X</button>
+      <button class="expense-delete__btn" value="${expense.id}">X</button>
     </div>
     `;
     expenseList.insertAdjacentHTML("afterbegin", html);
@@ -255,7 +254,7 @@ submitBtn.addEventListener("click", (e) => {
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     }),
-      (newExpense.id = Math.floor(Math.random() * 10000));
+      newExpense.id = Math.floor(Math.random() * 10000);
 
     // adds expense object to expenses array
     expenses.push(newExpense);
@@ -268,3 +267,16 @@ submitBtn.addEventListener("click", (e) => {
 // remove both function call after testing
 displayExpenses(expenses);
 calculateTotals(expenses);
+
+// // HELPER FUNCTION - used to find and delete expense from array
+const deleteExpenseHandler = function(expenseID) {
+  let idx = expenses.findIndex(this.id === 6)
+console.log(idx)
+}
+
+expenseListParent.addEventListener(('click'), (e) => {
+  if (e.target.className === 'expense-delete__btn') {
+    let expenseID = e.target.value;
+    deleteExpenseHandler(expenseID);
+  }
+})
