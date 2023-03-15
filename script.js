@@ -15,7 +15,7 @@ const list_detailLabel = document.querySelector(".expense-description__label");
 // BUTTONS
 const submitBtn = document.querySelector(".form-submit__btn");
 const filterMonthBtn = document.querySelector(".month__btn");
-const [...editExpenseBtn] = document.querySelectorAll(".expense-edit__btn");
+const editExpenseBtn = document.querySelectorAll(".expense-edit__btn");
 const deleteExpenseBtns = document.querySelectorAll(".expense-delete__btn");
 // INPUTS
 const inputAmountLabel = document.querySelector(".form-amount-area");
@@ -25,9 +25,10 @@ const [...inputCategoryArray] =
 // MISC
 const chart_innerBar = document.querySelector(".bar-inner");
 const expenseList = document.querySelector(".expense-list");
-const expenseListParent = document.getElementById('parent-list')
+const expenseListParent = document.getElementById("parent-list");
 const categorySection = document.querySelector(".category-section");
 const form = document.querySelector("form");
+const editModal = document.querySelector(".edit-modal");
 
 // STARTER VARIABLES
 const expenses = [
@@ -184,12 +185,12 @@ const calculateTotals = function (expenses) {
   chart_expenseTotalLabel.textContent = `$${total}`;
 
   // Updates the height of the category charts
-  chart_bar[0].style.height = `${(nightOut / total) * 200}% `;
-  chart_bar[1].style.height = `${(eatingOut / total) * 200}% `;
-  chart_bar[2].style.height = `${(groceries / total) * 200}% `;
-  chart_bar[3].style.height = `${(car / total) * 200}% `;
-  chart_bar[4].style.height = `${(fixed / total) * 200}% `;
-  chart_bar[5].style.height = `${(misc / total) * 200}% `;
+  chart_bar[0].style.height = `${(nightOut / total) * 100}% `;
+  chart_bar[1].style.height = `${(eatingOut / total) * 100}% `;
+  chart_bar[2].style.height = `${(groceries / total) * 100}% `;
+  chart_bar[3].style.height = `${(car / total) * 100}% `;
+  chart_bar[4].style.height = `${(fixed / total) * 100}% `;
+  chart_bar[5].style.height = `${(misc / total) * 100}% `;
 };
 
 // HELPER FUNCTIONS - Resets form field after submission
@@ -218,11 +219,28 @@ const displayExpenses = function (expenses) {
       </div>
       <button class="expense-edit__btn">Edit</button>
       <button class="expense-delete__btn" value="${expense.id}">X</button>
-    </div>
-    `;
+      </div>
+      `;
     expenseList.insertAdjacentHTML("afterbegin", html);
   });
 };
+
+// HELPER FUNCTION - used to find and delete expense from array
+const deleteExpenseHandler = function (expenseID) {
+  let idx = expenses.findIndex((element) => expenseID === element.id);
+  expenses.splice(idx, 1);
+  displayExpenses(expenses);
+  calculateTotals(expenses);
+};
+
+expenseListParent.addEventListener("click", (e) => {
+  let expenseID = Number(e.target.value);
+  if (e.target.className === "expense-delete__btn") {
+    deleteExpenseHandler(expenseID);
+  } else if (e.target.className === "expense-edit__btn") {
+    editExpenseHandler(expenseID);
+  }
+});
 
 // sets the selected category
 inputCategoryArray.forEach((category) => {
@@ -254,7 +272,7 @@ submitBtn.addEventListener("click", (e) => {
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     }),
-      newExpense.id = Math.floor(Math.random() * 10000);
+      (newExpense.id = Math.floor(Math.random() * 10000));
 
     // adds expense object to expenses array
     expenses.push(newExpense);
@@ -264,19 +282,12 @@ submitBtn.addEventListener("click", (e) => {
   resetForm();
 });
 
-// remove both function call after testing
+// Handles edit button
+const editExpenseHandler = function (expenseID) {
+  console.log("clicked on edit");
+  editModal.style.display = "block";
+};
+
+// remove both function calls after testing
 displayExpenses(expenses);
 calculateTotals(expenses);
-
-// // HELPER FUNCTION - used to find and delete expense from array
-const deleteExpenseHandler = function(expenseID) {
-  let idx = expenses.findIndex(this.id === 6)
-console.log(idx)
-}
-
-expenseListParent.addEventListener(('click'), (e) => {
-  if (e.target.className === 'expense-delete__btn') {
-    let expenseID = e.target.value;
-    deleteExpenseHandler(expenseID);
-  }
-})
