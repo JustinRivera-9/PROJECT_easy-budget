@@ -15,20 +15,28 @@ const list_detailLabel = document.querySelector(".expense-description__label");
 // BUTTONS
 const submitBtn = document.querySelector(".form-submit__btn");
 const filterMonthBtn = document.querySelector(".month__btn");
-const editExpenseBtn = document.querySelectorAll(".expense-edit__btn");
 const deleteExpenseBtns = document.querySelectorAll(".expense-delete__btn");
-// INPUTS
+// FORM ELEMENTS
 const inputAmountLabel = document.querySelector(".form-amount-area");
 const inputDetailLabel = document.querySelector(".form-input__description");
 const [...inputCategoryArray] =
   document.getElementsByClassName("form-category__btn");
+// EDIT ELEMENTS
+const modalBlur = document.querySelector(".modal");
+const editModal = document.querySelector(".edit-modal");
+const editExpenseBtn = document.querySelectorAll(".expense-edit__btn");
+const editConfirmBtn = document.querySelector(".edit-confirm__btn");
+const editCancelBtn = document.querySelector(".edit-cancel__btn");
+const [...editCategoryArray] =
+  document.getElementsByClassName("edit-category__btn");
+const editAmountLabel = document.querySelector(".edit-amount-area");
+const editDetailLabel = document.querySelector(".edit-input__description");
 // MISC
 const chart_innerBar = document.querySelector(".bar-inner");
 const expenseList = document.querySelector(".expense-list");
 const expenseListParent = document.getElementById("parent-list");
 const categorySection = document.querySelector(".category-section");
 const form = document.querySelector("form");
-const editModal = document.querySelector(".edit-modal");
 
 // STARTER VARIABLES
 const expenses = [
@@ -147,6 +155,30 @@ let inputCategory;
 let inputAmount;
 let inputDetail;
 
+// sets the selected category
+const selectCategory = function (arr) {
+  arr.forEach((category) => {
+    category.addEventListener("click", (e) => {
+      e.preventDefault();
+      inputCategory = e.target.innerHTML;
+      category.classList.toggle("active-category");
+      //IMPROVEMENT: Remove class
+    });
+  });
+};
+selectCategory(inputCategoryArray);
+selectCategory(editCategoryArray);
+
+// handles whether to delete or edit an expense
+expenseListParent.addEventListener("click", (e) => {
+  let expenseID = Number(e.target.value);
+  if (e.target.className === "expense-delete__btn") {
+    deleteExpenseHandler(expenseID);
+  } else if (e.target.className === "expense-edit__btn") {
+    editExpenseHandler(expenseID);
+  }
+});
+
 // HELPER FUNCTIONS - Calculates total for each category and total expenses
 const calculateTotals = function (expenses) {
   const nightOut = expenses
@@ -193,11 +225,18 @@ const calculateTotals = function (expenses) {
   chart_bar[5].style.height = `${(misc / total) * 100}% `;
 };
 
-// HELPER FUNCTIONS - Resets form field after submission
+// HELPER FUNCTIONS - Resets form fields after submission
 const resetForm = function () {
   inputAmountLabel.value = "";
   inputDetailLabel.value = "";
+  inputCategory = "";
   inputCategoryArray.forEach((category) => {
+    category.classList.remove("active-category");
+  });
+
+  editAmountLabel.value = "";
+  editDetailLabel.value = "";
+  editCategoryArray.forEach((category) => {
     category.classList.remove("active-category");
   });
 };
@@ -217,7 +256,7 @@ const displayExpenses = function (expenses) {
         <p class="expense-category__label">${expense.category}</p>
         <p class="expense-description__label">${expense.detail}</p>
       </div>
-      <button class="expense-edit__btn">Edit</button>
+      <button class="expense-edit__btn" value="${expense.id}">Edit</button>
       <button class="expense-delete__btn" value="${expense.id}">X</button>
       </div>
       `;
@@ -225,32 +264,13 @@ const displayExpenses = function (expenses) {
   });
 };
 
-// HELPER FUNCTION - used to find and delete expense from array
+// HELPER FUNCTION - used to delete expense from array
 const deleteExpenseHandler = function (expenseID) {
   let idx = expenses.findIndex((element) => expenseID === element.id);
   expenses.splice(idx, 1);
   displayExpenses(expenses);
   calculateTotals(expenses);
 };
-
-expenseListParent.addEventListener("click", (e) => {
-  let expenseID = Number(e.target.value);
-  if (e.target.className === "expense-delete__btn") {
-    deleteExpenseHandler(expenseID);
-  } else if (e.target.className === "expense-edit__btn") {
-    editExpenseHandler(expenseID);
-  }
-});
-
-// sets the selected category
-inputCategoryArray.forEach((category) => {
-  category.addEventListener("click", (e) => {
-    e.preventDefault();
-    inputCategory = e.target.innerHTML;
-    category.classList.toggle("active-category");
-    //IMPROVEMENT: Remove class
-  });
-});
 
 // Handles form submission
 submitBtn.addEventListener("click", (e) => {
@@ -284,8 +304,38 @@ submitBtn.addEventListener("click", (e) => {
 
 // Handles edit button
 const editExpenseHandler = function (expenseID) {
-  console.log("clicked on edit");
   editModal.style.display = "block";
+  // modalBlur.style.display = "block";
+  resetForm();
+
+  // Handles canceling an edit
+  editCancelBtn.addEventListener("click", () => {
+    editModal.style.display = "none";
+    // modalBlur.style.display = "none";
+
+    expenseID = "";
+  });
+
+  // Handles confirming an edit
+  editConfirmBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let idx = expenses.findIndex((element) => expenseID === element.id);
+    inputAmount = Number(editAmountLabel.value);
+    inputDetail = editDetailLabel.value;
+    if (!inputAmount || !inputDetail || !inputCategory) {
+      window.alert("Please enter a valid expense");
+    } else {
+      expenses[idx].amount = inputAmount;
+      expenses[idx].category = inputCategory;
+      expenses[idx].detail = inputDetail;
+
+      // Updates totals, expenses and resets form
+      displayExpenses(expenses);
+      calculateTotals(expenses);
+      editModal.style.display = "none";
+      // modalBlur.style.display = "none";
+    }
+  });
 };
 
 // remove both function calls after testing
