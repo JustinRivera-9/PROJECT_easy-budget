@@ -8,113 +8,111 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
-    <div class="modal-active">
-      <div class="left">
-        <header class="navbar">
-          <p class="name">JUSTIN RIVERA</p>
-          <div class="icons">
-            <a href="#" class="icon"><img src="./391-mail4.svg" /></a>
-            <a href="#" class="icon"><img src="./github-icon.svg" /></a>
-          </div>
-        </header>
-        <div class="overview-box">
-          <div class="total-box">
-            <div class="total-expense">
-              <p>Total Spent</p>
-              <div class="total-expense__label">$536.56</div>
-            </div>
-            <button class="month__btn">JULY ^</button>
-          </div>
-          <div class="expense-charts">
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Night Out</div>
-            </div>
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Eating Out</div>
-            </div>
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Groceries</div>
-            </div>
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Car</div>
-            </div>
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Fixed</div>
-            </div>
-            <div class="chart-category">
-              <div class="category-total__label">$53</div>
-              <div class="bar-outer">
-                <div class="bar-inner"></div>
-              </div>
-              <div class="category__label">Misc</div>
-            </div>
-          </div>
+    <div class="left">
+      <header class="navbar">
+        <p class="name">JUSTIN RIVERA</p>
+        <div class="icons">
+          <a href="#" class="icon"><img src="./391-mail4.svg" /></a>
+          <a href="#" class="icon"><img src="./github-icon.svg" /></a>
         </div>
-        <div class="expense-list" id="parent-list"></div>
-        <!-- edit expense modal __ need to add active class-->
-        <div class="edit-modal">
-          <h2 class="edit-label">AMOUNT ($)</h2>
-          <input type="number" class="edit-amount-area" />
-          <h2 class="edit-label">CATEGORY</h2>
-          <div class="edit-category-section">
-            <div class="edit-category__btn">NIGHT OUT</div>
-            <div class="edit-category__btn">EATING OUT</div>
-            <div class="edit-category__btn">GROCERIES</div>
-            <div class="edit-category__btn">CAR</div>
-            <div class="edit-category__btn">FIXED</div>
-            <div class="edit-category__btn">MISC</div>
+      </header>
+      <div class="overview-box">
+        <div class="total-box">
+          <div class="total-expense">
+            <p>Total Spent</p>
+            <div class="total-expense__label">$536.56</div>
           </div>
-          <textarea
-            class="edit-input__description"
-            cols="1rem"
-            rows="1"
-            placeholder="Denver beer co and dinner with friends..."
-          ></textarea>
-          <button class="edit-confirm__btn">Confirm</button>
-          <button class="edit-cancel__btn">Cancel</button>
+          <button class="month__btn">JULY ^</button>
+        </div>
+        <div class="expense-charts">
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Night Out</div>
+          </div>
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Eating Out</div>
+          </div>
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Groceries</div>
+          </div>
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Car</div>
+          </div>
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Fixed</div>
+          </div>
+          <div class="chart-category">
+            <div class="category-total__label">$53</div>
+            <div class="bar-outer">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="category__label">Misc</div>
+          </div>
         </div>
       </div>
-      <form class="right">
-        <h2 class="form-label">AMOUNT ($)</h2>
-        <input type="number" class="form-amount-area" />
-        <h2 class="form-label">CATEGORY</h2>
-        <div class="category-section">
-          <div class="form-category__btn">NIGHT OUT</div>
-          <div class="form-category__btn">EATING OUT</div>
-          <div class="form-category__btn">GROCERIES</div>
-          <div class="form-category__btn">CAR</div>
-          <div class="form-category__btn">FIXED</div>
-          <div class="form-category__btn">MISC</div>
+      <div class="expense-list" id="parent-list"></div>
+      <!-- edit expense modal __ need to add active class-->
+      <div class="edit-modal">
+        <h2 class="edit-label">AMOUNT ($)</h2>
+        <input type="number" class="edit-amount-area" />
+        <h2 class="edit-label">CATEGORY</h2>
+        <div class="edit-category-section">
+          <div class="edit-category__btn">NIGHT OUT</div>
+          <div class="edit-category__btn">EATING OUT</div>
+          <div class="edit-category__btn">GROCERIES</div>
+          <div class="edit-category__btn">CAR</div>
+          <div class="edit-category__btn">FIXED</div>
+          <div class="edit-category__btn">MISC</div>
         </div>
         <textarea
-          class="form-input__description"
+          class="edit-input__description"
           cols="1rem"
           rows="1"
           placeholder="Denver beer co and dinner with friends..."
         ></textarea>
-        <button class="form-submit__btn">ENTER EXPENSE</button>
-      </form>
+        <button class="edit-confirm__btn">Confirm</button>
+        <button class="edit-cancel__btn">Cancel</button>
+      </div>
     </div>
+    <form class="right">
+      <h2 class="form-label">AMOUNT ($)</h2>
+      <input type="number" class="form-amount-area" />
+      <h2 class="form-label">CATEGORY</h2>
+      <div class="category-section">
+        <div class="form-category__btn">NIGHT OUT</div>
+        <div class="form-category__btn">EATING OUT</div>
+        <div class="form-category__btn">GROCERIES</div>
+        <div class="form-category__btn">CAR</div>
+        <div class="form-category__btn">FIXED</div>
+        <div class="form-category__btn">MISC</div>
+      </div>
+      <textarea
+        class="form-input__description"
+        cols="1rem"
+        rows="1"
+        placeholder="Denver beer co and dinner with friends..."
+      ></textarea>
+      <button class="form-submit__btn">ENTER EXPENSE</button>
+    </form>
     <script src="./script.js"></script>
   </body>
 </html>
