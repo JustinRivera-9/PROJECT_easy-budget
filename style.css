@@ -9,12 +9,36 @@ body {
   background-color: #474747;
   display: inline-block;
   width: 100%;
-  z-index: 2;
 }
 
 .left {
   width: 74%;
+  z-index: 1;
+}
+
+.right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 24%;
+  height: 1024px;
+  background-color: #f6f6f6;
+  border: 2px solid #ffffff;
+  box-shadow: 0px 0px 10px 2px #a4fff3;
+  border-radius: 0.75rem 0;
   z-index: 2;
+}
+
+.modal {
+  z-index: 3;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 0; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Navigation Bar */
@@ -229,18 +253,6 @@ body {
 }
 
 /* FORM styles */
-.right {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 24%;
-  height: 1024px;
-  background-color: #f6f6f6;
-  border: 2px solid #ffffff;
-  box-shadow: 0px 0px 10px 2px #a4fff3;
-  border-radius: 0.75rem 0;
-}
-
 .form-amount-area {
   margin: 1rem 3rem;
   height: 10%;
@@ -387,13 +399,6 @@ body {
 }
 
 /* edit button modal */
-.modal-active {
-  height: 100%;
-  width: 100%;
-  /* background-color: #000; */
-  z-index: 1;
-}
-
 .edit-modal {
   display: none;
   background-color: #f6f6f6;
@@ -403,6 +408,7 @@ body {
   width: 50%;
   height: fit-content;
   border-radius: 25px;
+  z-index: 4;
 }
 
 .edit-amount-area {
