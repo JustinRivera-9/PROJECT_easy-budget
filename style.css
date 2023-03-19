@@ -21,24 +21,12 @@ body {
   top: 0;
   right: 0;
   width: 24%;
-  height: 1024px;
+  height: 102vh;
   background-color: #f6f6f6;
   border: 2px solid #ffffff;
   box-shadow: 0px 0px 10px 2px #a4fff3;
   border-radius: 0.75rem 0;
   z-index: 2;
-}
-
-.modal {
-  z-index: 3;
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 0; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Navigation Bar */
@@ -99,25 +87,47 @@ body {
   font-weight: bold;
 }
 
-.month__btn {
+/* month filter button */
+.filter-container {
   float: right;
   position: absolute;
-  top: 3.75rem;
-  left: 64%;
-  padding: 0.75rem 1.25rem;
+  top: 3.5rem;
+  left: 65%;
+}
+
+.month-filter__btn {
+  font-size: 1.5rem;
+  width: 6rem;
   height: fit-content;
-  border-radius: 3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   box-shadow: 0px 0px 3px 1px #2e2e2e;
   background-color: #2e2e2e;
   color: #a4fff3;
   border: none;
-  font-size: 1.25rem;
 }
 
-.month__btn:hover {
+.month-filter__btn:hover {
+  display: block;
   cursor: pointer;
+  background-color: #f6f6f6;
+  color: #2c2c2c;
+}
+.dropdown-content {
+  background-color: #b9b9b9;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 1);
+}
+
+.month-option {
+  font-size: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.month-option:hover {
   background-color: #a4fff3;
-  color: #2e2e2e;
+  cursor: pointer;
 }
 
 /* area with charts */
@@ -134,8 +144,8 @@ body {
 }
 
 .bar-outer {
-  height: 10rem;
-  box-shadow: 0px 0px 15px #000;
+  height: 8rem;
+  box-shadow: 0px 0px 7px #000;
   border-radius: 15px 15px 0px 0px;
   /* need to change height */
 }
@@ -254,12 +264,12 @@ body {
 
 /* FORM styles */
 .form-amount-area {
-  margin: 1rem 3rem;
-  height: 10%;
+  margin: 1rem 2.5rem;
+  height: 3rem;
   text-align: center;
-  width: 80%;
+  width: 15rem;
   color: #a4fff3;
-  font-size: 4rem;
+  font-size: 2rem;
   background-color: #2e2e2e;
   border-radius: 1rem;
 }
@@ -267,14 +277,14 @@ body {
 .form-label {
   margin-top: 0.5rem;
   position: relative;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: 100%;
   text-align: center;
 }
 
 .category-section {
   display: inline-block;
-  padding-left: 4.25rem;
+  margin-left: 1.25rem;
   text-align: center;
   /* border: 1px solid blue; */
   width: 100%;
@@ -282,12 +292,12 @@ body {
 }
 
 .form-category__btn {
-  width: 35%;
-  height: 7rem;
+  width: 7rem;
+  height: 4rem;
   float: left;
-  font-size: 1.7rem;
-  margin: 0.75rem 0.75rem;
-  padding: 1.75rem 0;
+  font-size: 1rem;
+  margin: 0.5rem 0.75rem;
+  padding: 1.25rem 0;
   background-color: transparent;
   color: #2e2e2e;
   border: 2px solid #2e2e2e;
@@ -299,48 +309,14 @@ body {
   background-color: #2e2e2e;
   color: #a4fff3;
   font-weight: bold;
-  font-size: 1.75rem;
   cursor: pointer;
   position: relative;
-  top: -5px;
-  box-shadow: 0px 0px 15px #005f53;
+  top: -2px;
+  box-shadow: 0px 0px 10px #575757;
 }
 
 .form-category__btn:active {
-  box-shadow: 0px 0px 15px #005f53;
-  position: relative;
-  top: 0px;
-  font-weight: bold;
-  font-size: 1.7rem;
-}
-
-.form-category__btn:nth-child(3) {
-  font-size: 1.5rem;
-  width: 35%;
-  height: 7rem;
-  float: left;
-  font-size: 1.25rem;
-  margin: 0.75rem 0.75rem;
-  padding: 3rem 0;
-  background-color: transparent;
-  color: #2e2e2e;
-  border: 2px solid #2e2e2e;
-  border-radius: 15px;
-}
-
-.form-category__btn:nth-child(3):hover,
-.active-category {
-  background-color: #2e2e2e;
-  color: #a4fff3;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  top: -5px;
-  box-shadow: 0px 0px 15px #005f53;
-}
-
-.form-category__btn:nth-child(3):active {
-  box-shadow: 0px 0px 15px #005f53;
+  box-shadow: 0px 0px 10px #575757;
   position: relative;
   top: 0px;
   font-weight: bold;
@@ -348,28 +324,28 @@ body {
 
 .form-input__description {
   width: 80%;
-  height: 150px;
-  padding: 12px 20px;
-  margin-left: 2.75rem;
+  height: 100px;
+  padding: 15px;
+  margin-left: 2rem;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 1rem;
   background-color: #f8f8f8;
-  font-size: 16px;
+  font-size: 1rem;
   resize: none;
 }
 
 .form-submit__btn {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   height: fit-content;
   border-radius: 3rem;
   box-shadow: 0px 0px 3px 1px #000000;
   background-color: #2e2e2e;
   color: #a4fff3;
   border: none;
-  width: 80%;
-  margin: 1.5rem 3rem;
-  font-size: 2rem;
+  width: 17rem;
+  margin: 1.5rem 1.5rem;
+  font-size: 1.5rem;
 }
 
 .form-submit__btn:hover {
@@ -399,31 +375,43 @@ body {
 }
 
 /* edit button modal */
+.modal-active {
+  z-index: 3;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
 .edit-modal {
   display: none;
-  background-color: #f6f6f6;
+  background-color: #dedede;
   position: fixed;
-  top: 20%;
-  left: 13%;
+  top: 16%;
+  left: 15%;
   width: 50%;
   height: fit-content;
   border-radius: 25px;
   z-index: 4;
+  padding: 0 0.5rem;
 }
 
 .edit-amount-area {
-  margin: 1rem 33%;
-  height: 10%;
+  margin: 0 34%;
+  height: fit-content;
   text-align: center;
-  width: 20rem;
+  width: 15rem;
   color: #a4fff3;
-  font-size: 4rem;
+  font-size: 2.5rem;
   background-color: #2e2e2e;
   border-radius: 1rem;
 }
 
 .edit-label {
-  margin-top: 0.75rem;
+  margin: 1rem;
   position: relative;
   font-size: 1.5rem;
   width: 100%;
@@ -432,19 +420,18 @@ body {
 
 .edit-category-section {
   display: inline-block;
-  padding: 0 1.5rem;
   text-align: center;
   width: 100%;
   margin-bottom: 1rem;
 }
 
 .edit-category__btn {
-  width: 9rem;
-  height: 7rem;
+  width: 6.25rem;
+  height: 3rem;
   float: left;
-  font-size: 1.5rem;
-  margin: 0.75rem 0.5rem;
-  padding: 1.75rem 0;
+  font-size: 0.95rem;
+  margin: 0 0.3rem;
+  padding-top: 0.75rem;
   background-color: transparent;
   color: #2e2e2e;
   border: 2px solid #2e2e2e;
@@ -454,28 +441,24 @@ body {
 .edit-category__btn:hover,
 .active-category {
   background-color: #2e2e2e;
+  border: none;
   color: #a4fff3;
-  font-weight: bold;
-  /* font-size: 1.4rem; */
   cursor: pointer;
   position: relative;
-  top: -5px;
-  box-shadow: 0px 0px 15px #005f53;
+  top: 1px;
+  box-shadow: 0px 0px 5px #005f53;
 }
 
 .edit-category__btn:active {
-  box-shadow: 0px 0px 15px #005f53;
   position: relative;
   top: 0px;
-  font-weight: bold;
-  font-size: 1.5rem;
 }
 
 .edit-input__description {
   width: 75%;
-  height: 150px;
+  height: 75px;
   padding: 12px 25px;
-  margin-left: 7.5rem;
+  margin-left: 6rem;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 1rem;
@@ -484,29 +467,15 @@ body {
   resize: none;
 }
 
-.edit-confirm__btn {
-  padding: 1rem 1.25rem;
-  height: fit-content;
-  border-radius: 3rem;
-  box-shadow: 0px 0px 3px 1px #000000;
-  background-color: #2e2e2e;
-  color: #a4fff3;
-  border: none;
-  width: 55%;
-  margin: 2rem 0;
-  margin-left: 7.25rem;
-  font-size: 2rem;
-}
-
 .edit-confirm__btn:hover {
-  box-shadow: 0px 0px 15px #000000;
+  box-shadow: 0px 0px 5px #000000;
   border: 1px solid #2c2c2c;
   background-color: #f6f6f6;
   color: #000000;
   font-weight: bold;
   cursor: pointer;
   position: relative;
-  top: -2px;
+  top: -1px;
 }
 
 .edit-confirm__btn:active {
@@ -518,31 +487,46 @@ body {
   top: 0px;
 }
 
-.edit-cancel__btn {
-  padding: 1rem 1.25rem;
+.edit-confirm__btn {
+  padding: 0.6rem;
   height: fit-content;
   border-radius: 3rem;
-  color: #ff0000;
-  border: 1px solid red;
-  width: 15%;
-  margin-left: 2rem;
-  font-size: 2rem;
+  background-color: #2e2e2e;
+  color: #a4fff3;
+  border: none;
+  width: 33%;
+  margin: 1rem 0;
+  margin-left: 10rem;
+  font-size: 1.5rem;
+}
+
+.edit-cancel__btn {
+  padding: 0.5rem;
+  height: fit-content;
+  border-radius: 3rem;
+  color: #ffffff;
+  background-color: #ff0000;
+  border: none;
+  width: 16%;
+  margin-left: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .edit-cancel__btn:hover {
-  box-shadow: 0px 0px 15px #ff0000;
-  border: 1px solid #2c2c2c;
-  background-color: #ff0000;
-  color: #ffffff;
+  box-shadow: 0px 0px 5px #ff0000;
+  border: 1px solid #ff0000;
+  background-color: #fff;
+  color: #ff0000;
   font-weight: bold;
   cursor: pointer;
   position: relative;
+  top: -1px;
 }
 
 .edit-cancel__btn:active {
   color: red;
   background-color: #f6f6f6;
-  border: 1px solid red;
+  border: none;
   font-weight: bold;
   position: relative;
   top: 0px;
