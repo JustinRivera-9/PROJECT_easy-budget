@@ -12,8 +12,15 @@
       <header class="navbar">
         <p class="name">JUSTIN RIVERA</p>
         <div class="icons">
-          <a href="#" class="icon"><img src="./391-mail4.svg" /></a>
-          <a href="#" class="icon"><img src="./github-icon.svg" /></a>
+          <a href="mailto:justin_rivera9@outlook.com" class="icon"
+            ><img src="./391-mail4.svg"
+          /></a>
+          <a
+            href="https://github.com/JustinRivera-9/PROJECT_easy-budget"
+            class="icon"
+            target="_blank"
+            ><img src="./github-icon.svg"
+          /></a>
         </div>
       </header>
       <div class="overview-box">
@@ -22,7 +29,24 @@
             <p>Total Spent</p>
             <div class="total-expense__label">$536.56</div>
           </div>
-          <button class="month__btn">JULY ^</button>
+          <div class="filter-container">
+            <h2 class="month-filter__btn">Month</h2>
+            <div class="dropdown-content">
+              <p class="month-option">All</p>
+              <p class="month-option">Jan</p>
+              <p class="month-option">Feb</p>
+              <p class="month-option">Mar</p>
+              <p class="month-option">Apr</p>
+              <p class="month-option">May</p>
+              <p class="month-option">Jun</p>
+              <p class="month-option">Jul</p>
+              <p class="month-option">Aug</p>
+              <p class="month-option">Sep</p>
+              <p class="month-option">Oct</p>
+              <p class="month-option">Nov</p>
+              <p class="month-option">Dec</p>
+            </div>
+          </div>
         </div>
         <div class="expense-charts">
           <div class="chart-category">
@@ -70,7 +94,28 @@
         </div>
       </div>
       <div class="expense-list" id="parent-list"></div>
-      <!-- edit expense modal __ need to add active class-->
+    </div>
+    <form class="right">
+      <h2 class="form-label">AMOUNT ($)</h2>
+      <input type="number" class="form-amount-area" />
+      <h2 class="form-label">CATEGORY</h2>
+      <div class="category-section">
+        <div class="form-category__btn">NIGHT OUT</div>
+        <div class="form-category__btn">EATING OUT</div>
+        <div class="form-category__btn">GROCERIES</div>
+        <div class="form-category__btn">CAR</div>
+        <div class="form-category__btn">FIXED</div>
+        <div class="form-category__btn">MISC</div>
+      </div>
+      <textarea
+        class="form-input__description"
+        cols="1rem"
+        rows="1"
+        placeholder="Denver beer co and dinner with friends..."
+      ></textarea>
+      <button class="form-submit__btn">ENTER EXPENSE</button>
+    </form>
+    <div class="modal-bg">
       <div class="edit-modal">
         <h2 class="edit-label">AMOUNT ($)</h2>
         <input type="number" class="edit-amount-area" />
@@ -93,26 +138,6 @@
         <button class="edit-cancel__btn">Cancel</button>
       </div>
     </div>
-    <form class="right">
-      <h2 class="form-label">AMOUNT ($)</h2>
-      <input type="number" class="form-amount-area" />
-      <h2 class="form-label">CATEGORY</h2>
-      <div class="category-section">
-        <div class="form-category__btn">NIGHT OUT</div>
-        <div class="form-category__btn">EATING OUT</div>
-        <div class="form-category__btn">GROCERIES</div>
-        <div class="form-category__btn">CAR</div>
-        <div class="form-category__btn">FIXED</div>
-        <div class="form-category__btn">MISC</div>
-      </div>
-      <textarea
-        class="form-input__description"
-        cols="1rem"
-        rows="1"
-        placeholder="Denver beer co and dinner with friends..."
-      ></textarea>
-      <button class="form-submit__btn">ENTER EXPENSE</button>
-    </form>
     <script src="./script.js"></script>
   </body>
 </html>
