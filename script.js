@@ -14,7 +14,7 @@ const list_categoryLabel = document.querySelector(".expense-category__label");
 const list_detailLabel = document.querySelector(".expense-description__label");
 // BUTTONS
 const submitBtn = document.querySelector(".form-submit__btn");
-const filterMonthBtn = document.querySelector(".month__btn");
+const filterMonthBtn = document.querySelector(".month-filter__btn");
 const deleteExpenseBtns = document.querySelectorAll(".expense-delete__btn");
 // FORM ELEMENTS
 const inputAmountLabel = document.querySelector(".form-amount-area");
@@ -22,7 +22,7 @@ const inputDetailLabel = document.querySelector(".form-input__description");
 const [...inputCategoryArray] =
   document.getElementsByClassName("form-category__btn");
 // EDIT ELEMENTS
-const modalBlur = document.querySelector(".modal");
+const modal = document.querySelector(".modal-bg");
 const editModal = document.querySelector(".edit-modal");
 const editExpenseBtn = document.querySelectorAll(".expense-edit__btn");
 const editConfirmBtn = document.querySelector(".edit-confirm__btn");
@@ -37,6 +37,8 @@ const expenseList = document.querySelector(".expense-list");
 const expenseListParent = document.getElementById("parent-list");
 const categorySection = document.querySelector(".category-section");
 const form = document.querySelector("form");
+const filterDropdown = document.querySelector(".dropdown-content");
+const [...monthOptions] = document.querySelectorAll(".month-option");
 
 // STARTER VARIABLES
 const expenses = [
@@ -45,7 +47,7 @@ const expenses = [
     category: "NIGHT OUT",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 3,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -56,7 +58,7 @@ const expenses = [
     category: "FIXED",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth(),
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -67,7 +69,7 @@ const expenses = [
     category: "CAR",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 3,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -78,7 +80,7 @@ const expenses = [
     category: "FIXED",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 2,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -100,7 +102,7 @@ const expenses = [
     category: "EATING OUT",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 6,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -111,7 +113,7 @@ const expenses = [
     category: "NIGHT OUT",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 6,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -122,7 +124,7 @@ const expenses = [
     category: "MISC",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 6,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -133,7 +135,7 @@ const expenses = [
     category: "EATING OUT",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 9,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
@@ -144,16 +146,33 @@ const expenses = [
     category: "GROCERIES",
     detail: "Test detail",
     date: {
-      month: new Date().getMonth() + 1,
+      month: new Date().getMonth() + 4,
       day: new Date().getDay() + 1,
       year: new Date().getFullYear(),
     },
     id: 10,
   },
 ];
+const monthArr = [
+  "All",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 let inputCategory;
 let inputAmount;
 let inputDetail;
+let monthFilter;
+let filteredArray;
 
 // sets the selected category
 const selectCategory = function (arr) {
@@ -217,12 +236,21 @@ const calculateTotals = function (expenses) {
   chart_expenseTotalLabel.textContent = `$${total}`;
 
   // Updates the height of the category charts
-  chart_bar[0].style.height = `${(nightOut / total) * 100}% `;
-  chart_bar[1].style.height = `${(eatingOut / total) * 100}% `;
-  chart_bar[2].style.height = `${(groceries / total) * 100}% `;
-  chart_bar[3].style.height = `${(car / total) * 100}% `;
-  chart_bar[4].style.height = `${(fixed / total) * 100}% `;
-  chart_bar[5].style.height = `${(misc / total) * 100}% `;
+  if (!total) {
+    chart_bar[0].style.height = "0%";
+    chart_bar[1].style.height = "0%";
+    chart_bar[2].style.height = "0%";
+    chart_bar[3].style.height = "0%";
+    chart_bar[4].style.height = "0%";
+    chart_bar[5].style.height = "0%";
+  } else {
+    chart_bar[0].style.height = `${(nightOut / total) * 100}% `;
+    chart_bar[1].style.height = `${(eatingOut / total) * 100}% `;
+    chart_bar[2].style.height = `${(groceries / total) * 100}% `;
+    chart_bar[3].style.height = `${(car / total) * 100}% `;
+    chart_bar[4].style.height = `${(fixed / total) * 100}% `;
+    chart_bar[5].style.height = `${(misc / total) * 100}% `;
+  }
 };
 
 // HELPER FUNCTIONS - Resets form fields after submission
@@ -241,10 +269,37 @@ const resetForm = function () {
   });
 };
 
+// HELPER FUNCTION - Filters the expenses
+filterMonthBtn.addEventListener("click", () => {
+  const filterActive = filterDropdown.style.display === "block";
+  if (filterActive) filterDropdown.style.display = "none";
+  else filterDropdown.style.display = "block";
+});
+
+monthOptions.forEach((month) => {
+  month.addEventListener("click", () => {
+    filterDropdown.style.display = "none";
+    monthFilter = month.textContent;
+    let idx = monthArr.findIndex((month) => month === monthFilter);
+    filterMonthBtn.textContent = monthArr[idx];
+
+    let filteredArray = expenses.filter(
+      (expense) => expense.date.month === idx
+    );
+
+    if (idx === 0) {
+      displayExpenses(expenses);
+      calculateTotals(expenses);
+    } else {
+      displayExpenses(filteredArray);
+      calculateTotals(filteredArray);
+    }
+  });
+});
+
 // HELPER FUNCTIONS - displays expense list
 const displayExpenses = function (expenses) {
   expenseList.innerHTML = "";
-
   expenses.forEach((expense) => {
     const html = `
     <div class="expense-item">
@@ -305,13 +360,12 @@ submitBtn.addEventListener("click", (e) => {
 // Handles edit button
 const editExpenseHandler = function (expenseID) {
   editModal.style.display = "block";
-  // modalBlur.style.display = "block";
   resetForm();
 
   // Handles canceling an edit
   editCancelBtn.addEventListener("click", () => {
     editModal.style.display = "none";
-    // modalBlur.style.display = "none";
+    // modal.style.display = "none";
 
     expenseID = "";
   });
@@ -333,7 +387,7 @@ const editExpenseHandler = function (expenseID) {
       displayExpenses(expenses);
       calculateTotals(expenses);
       editModal.style.display = "none";
-      // modalBlur.style.display = "none";
+      // modal.style.display = "none";
     }
   });
 };
@@ -341,3 +395,11 @@ const editExpenseHandler = function (expenseID) {
 // remove both function calls after testing
 displayExpenses(expenses);
 calculateTotals(expenses);
+
+////////// BUGS TO FIX
+// 1. If you have a filter on and try to delete or edit an expense, the displayExpenses function passes in the expenses array and not the filteredArray
+// 2. When adding a new expense, the displayExpenses function passes in the expenses array and not the filteredArray
+// 3. Use Javascript to automatically reformat the currency and date values
+// 4. The inner bar color on the chart is top-down instead of bottom-up
+// 5. Multiple categories look selected in the edit modal and expense form. The value is based off the last clicked box which is correct. Need logic so that 2 elements in that div can't contain the active class.
+// 6. When the edit button is clicked there needs to be a background blur
