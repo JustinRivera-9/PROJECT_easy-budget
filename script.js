@@ -190,7 +190,7 @@ selectCategory(editCategoryArray);
 
 // handles whether to delete or edit an expense
 expenseListParent.addEventListener("click", (e) => {
-  let expenseID = Number(e.target.value);
+  let expenseID = +e.target.value;
   if (e.target.className === "expense-delete__btn") {
     deleteExpenseHandler(expenseID);
   } else if (e.target.className === "expense-edit__btn") {
@@ -331,21 +331,22 @@ const deleteExpenseHandler = function (expenseID) {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  inputAmount = Number(inputAmountLabel.value);
+  inputAmount = +inputAmountLabel.value;
   inputDetail = inputDetailLabel.value;
 
   if (!inputAmount || !inputDetail || !inputCategory) {
     window.alert("Please enter a valid expense");
   } else {
     // adds properties to the expense object
+    let date = new Date();
     const newExpense = {};
     newExpense.amount = inputAmount;
     newExpense.category = inputCategory;
     newExpense.detail = inputDetail;
     (newExpense.date = {
-      month: new Date().getMonth() + 1,
-      day: new Date().getDay() + 1,
-      year: new Date().getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+      year: date.getFullYear(),
     }),
       (newExpense.id = Math.floor(Math.random() * 10000));
 
@@ -374,7 +375,7 @@ const editExpenseHandler = function (expenseID) {
   editConfirmBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let idx = expenses.findIndex((element) => expenseID === element.id);
-    inputAmount = Number(editAmountLabel.value);
+    inputAmount = +editAmountLabel.value;
     inputDetail = editDetailLabel.value;
     if (!inputAmount || !inputDetail || !inputCategory) {
       window.alert("Please enter a valid expense");
@@ -397,9 +398,10 @@ displayExpenses(expenses);
 calculateTotals(expenses);
 
 ////////// BUGS TO FIX
-// 1. If you have a filter on and try to delete or edit an expense, the displayExpenses function passes in the expenses array and not the filteredArray
-// 2. When adding a new expense, the displayExpenses function passes in the expenses array and not the filteredArray
-// 3. Use Javascript to automatically reformat the currency and date values
-// 4. The inner bar color on the chart is top-down instead of bottom-up
-// 5. Multiple categories look selected in the edit modal and expense form. The value is based off the last clicked box which is correct. Need logic so that 2 elements in that div can't contain the active class.
-// 6. When the edit button is clicked there needs to be a background blur
+// 2. If you have a filter on and try to delete or edit an expense, the displayExpenses function passes in the expenses array and not the filteredArray
+// 3. When adding a new expense, the displayExpenses function passes in the expenses array and not the filteredArray
+// 4. Use built-in Javascript functions to automatically reformat the currency and date values
+// 5. The inner bar color on the chart is top-down instead of bottom-up
+// 6. Multiple categories look selected in the edit modal and expense form. The value is based off the last clicked box which is correct. Need logic so that 2 elements in that container can't contain the active class.
+// 7. When the edit button is clicked there needs to be a background blur
+console.log("test");
